@@ -9,4 +9,4 @@
       shell: "{{ set_up }}"
       become: yes
     - name: Cleaning up
-      shell: rm -rf set-up.sh
+      shell: rm set-up.sh
