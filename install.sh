@@ -21,17 +21,22 @@ ANSIBLE_HOSTS_FILE=$ANSIBLE_FILES_PATH/"hosts"
 PRIVATE_KEY_FILE_PATH_PATTERN="ansible_ssh_private_key_file"
 PRIVATE_KEY_FILE_PATH=$(grep $PRIVATE_KEY_FILE_PATH_PATTERN $HOSTS_CONF_FILE | awk -F "=" '{print $2}')
 
-SIZE_PATTERN="size"
-SIZE=$(grep $SIZE_PATTERN $HOSTS_CONF_FILE | awk -F "=" '{print $2}')
 
-sed -i 's/\[worker-machine\].*\[worker-machine:vars\]/[worker-machine]\n\n[worker-machine:vars]/' $ANSIBLE_HOSTS_FILE
+DEPLOYED_WORKER_IP_PATTERN="deployed_worker_ip"
+#NUMBER_OF_WORKERS=$(grep $DEPLOYED_WORKER_IP $HOSTS_CONF_FILE | wc -l)
+sed -i 's/\[worker-machine\].*\[worker-machine:vars\]/\[worker-machine\]\n\n\[worker-machine:vars\]/' $ANSIBLE_HOSTS_FILE
 
-for counter in $(seq 1 ${SIZE})
-do
-  DEPLOYED_WORKER_IP_PATTERN="deployed_worker_ip_${counter}"
-  DEPLOYED_WORKER_IP=$(grep $DEPLOYED_WORKER_IP_PATTERN $HOSTS_CONF_FILE | awk -F "=" '{print $2}')
-  sed -i "/\[worker-machine:vars\]/i ${DEPLOYED_WORKER_IP}" $ANSIBLE_HOSTS_FILE
+grep $DEPLOYED_WORKER_IP_PATTERN $HOSTS_CONF_FILE| while read -r line ; do
+    DEPLOYED_WORKER_IP=$(echo $line | awk -F "=" '{print $2}')
+    sed -i "/\[worker-machine:vars\]/i ${DEPLOYED_WORKER_IP}" $ANSIBLE_HOSTS_FILE
 done
+
+# for counter in $(seq 1 ${NUMBER_OF_WORKERS})
+# do
+#   DEPLOYED_WORKER_IP_PATTERN="deployed_worker_ip_${counter}"
+  
+#   sed -i "/\[worker-machine:vars\]/i ${DEPLOYED_WORKER_IP}" $ANSIBLE_HOSTS_FILE
+# done
 
 # # Writes the path of the private key file in Ansible hosts file
 # sed -i "s#.*$PRIVATE_KEY_FILE_PATH_PATTERN=.*#$PRIVATE_KEY_FILE_PATH_PATTERN=$PRIVATE_KEY_FILE_PATH#" $ANSIBLE_HOSTS_FILE

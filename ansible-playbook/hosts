@@ -1,4 +1,7 @@
 [worker-machine]
+
+10.11.4.209
+10.11.4.248
 10.11.4.209
 10.11.4.248
 [worker-machine:vars]
