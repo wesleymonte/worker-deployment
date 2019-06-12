@@ -1,12 +1,12 @@
 ---
 - hosts: worker-machine
   vars:
-    set_up: bash -x set-up.sh
+    setup: bash -x setup.sh
   tasks:
-    - name: "copy set-up file"
-      copy: src="../set-up.sh" dest="/home/ubuntu"
+    - name: "copy setup file"
+      copy: src="../setup.sh" dest="/home/ubuntu"
     - name: Setting up environment
-      shell: "{{ set_up }}"
+      shell: "{{ setup }}"
       become: yes
     - name: Cleaning up
-      shell: rm set-up.sh
+      shell: rm setup.sh
