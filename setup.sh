@@ -3,7 +3,7 @@
 # A script to setup a worker environment.
 # It expects to be run on Ubuntu 16.04 via 'sudo'
 
-install-docker() {
+install_docker() {
     echo "--> Installing docker"
     apt update
 
@@ -27,7 +27,7 @@ install-docker() {
     apt-get install -y docker-ce
 }
 
-open-tcp-port() {
+open_tcp_port() {
     echo "--> Setting up the TCP port"
 
     local PROPERTY_PATTERN="ExecStart"
@@ -38,29 +38,19 @@ open-tcp-port() {
     sed -i "s@.*${PROPERTY_PATTERN}=.*@${PROPERTY_PATTERN}=${PROPERTY_VALUE}@" $DOCKER_CONF_FILE
 }
 
-pull-default-images() {    
-
-    echo "--> Pulling default docker images"
-
-    docker pull wesleymonte/simple-worker
-    docker pull ubuntu:latest
-}
-
 main() {
     CHECK_DOCKER_INSTALLATION=$(dpkg -l | grep -c docker-ce)
 
     if ! [ $CHECK_DOCKER_INSTALLATION -ne 0 ]; then
-        install-docker
+        install_docker
     else 
         echo "--> Docker its already installed"
     fi
 
-    open-tcp-port
+    open_tcp_port
 
     systemctl daemon-reload
-    service docker restart
-
-    pull-default-images
+    service docker restart   
 }
 
 main

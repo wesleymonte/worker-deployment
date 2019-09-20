@@ -1,6 +1,6 @@
 [worker-machine]
-10.11.4.209
-10.11.4.248
+10.11.4.43
+10.11.4.31
 [worker-machine:vars]
-ansible_ssh_private_key_file=/home/wesleyham/.ssh/fogbow_priv
+ansible_ssh_private_key_file=/home/emanueljbm/.ssh/fogbow_priv
 ansible_python_interpreter=/usr/bin/python3
