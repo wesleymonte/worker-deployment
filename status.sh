@@ -33,7 +33,7 @@ done
 # Writes the path of the private key file in Ansible hosts file
 sed -i "s#.*$PRIVATE_KEY_FILE_PATH_PATTERN=.*#$PRIVATE_KEY_FILE_PATH_PATTERN=$PRIVATE_KEY_FILE_PATH#" $ANSIBLE_HOSTS_FILE
 
-readonly DEPLOY_WORKER_YML_FILE="deploy-worker.yml"
+readonly CHECK_WORKER_YML_FILE="check-worker.yml"
 
-(cd $ANSIBLE_FILES_PATH && ansible-playbook -vvv $DEPLOY_WORKER_YML_FILE)
+(cd $ANSIBLE_FILES_PATH && ansible-playbook -vvv $CHECK_WORKER_YML_FILE)
 exit $?

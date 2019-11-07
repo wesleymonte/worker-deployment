@@ -1,0 +1,12 @@
+---
+- hosts: worker-machine
+  vars:
+    check: bash -x check.sh
+  tasks:
+    - name: "copy check file"
+      copy: src="../check.sh" dest="/home/ubuntu"
+    - name: Checking up environment
+      shell: "{{ check }}"
+      become: yes
+    - name: Cleaning up
+      shell: rm check.sh
