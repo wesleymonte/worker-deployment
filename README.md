@@ -5,7 +5,7 @@ Arrebol tasks are processed by Workers. In a typical deployment, a few Workers a
 ## Requeriments
 
 Before the configuration and installation of Worker Node dependencies, each Worker Node virtual machine should be configured to be reached via SSH (using a rsa key pair). Also, the [Ansible automation tool](https://www.ansible.com/) should be installed in the deploy coordination host.
-Warning: Deployment does not work on Ubuntu version 14 or earlier.
+Warning: Deployment does not work for nodes with Ubuntu version 14 or earlier.
 
 ## Configuration
 
