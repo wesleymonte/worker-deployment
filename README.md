@@ -32,3 +32,69 @@ After configuring the `hosts.conf` file, execute the `install.sh` script to setu
   ```
   sudo bash install.sh
   ```
+
+## Check 
+
+To verify whether the worker deployment was successful, one can submit below sample requests to the docker api.
+
+---
+Request
+```bash
+curl http://<worker-address>:5555/version
+```
+
+Expected
+```json
+{
+  "Platform": {
+    "Name": "Docker Engine - Community"
+  },
+  "Components": [
+    {
+      "Name": "Engine",
+      "Version": "19.03.7",
+      "Details": {
+        "ApiVersion": "1.40",
+        "Arch": "amd64",
+        "BuildTime": "2020-03-04T01:21:08.000000000+00:00",
+        "Experimental": "false",
+        "GitCommit": "7141c199a2",
+        "GoVersion": "go1.12.17",
+        "KernelVersion": "4.15.0-88-generic",
+        "MinAPIVersion": "1.12",
+        "Os": "linux"
+      }
+    },
+    {
+      "Name": "containerd",
+      "Version": "1.2.13",
+      "Details": {
+        "GitCommit": "7ad184331fa3e55e52b890ea95e65ba581ae3429"
+      }
+    },
+    {
+      "Name": "runc",
+      "Version": "1.0.0-rc10",
+      "Details": {
+        "GitCommit": "dc9208a3303feef5b3839f4323d9beb36df0a9dd"
+      }
+    },
+    {
+      "Name": "docker-init",
+      "Version": "0.18.0",
+      "Details": {
+        "GitCommit": "fec3683"
+      }
+    }
+  ],
+  "Version": "19.03.7",
+  "ApiVersion": "1.40",
+  "MinAPIVersion": "1.12",
+  "GitCommit": "7141c199a2",
+  "GoVersion": "go1.12.17",
+  "Os": "linux",
+  "Arch": "amd64",
+  "KernelVersion": "4.15.0-88-generic",
+  "BuildTime": "2020-03-04T01:21:08.000000000+00:00"
+}
+```
