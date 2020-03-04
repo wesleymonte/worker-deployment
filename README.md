@@ -37,6 +37,8 @@ After configuring the `hosts.conf` file, execute the `install.sh` script to setu
 
 To verify whether the worker deployment was successful, one can submit below sample requests to the docker api.
 
+`Warning`: By default, the deployment opens port 5555 for the docker api.
+
 ---
 Request
 ```bash
